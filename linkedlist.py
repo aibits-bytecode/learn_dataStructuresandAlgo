@@ -35,8 +35,8 @@ class LinkedList:
             self.insert_at_end(data)
 
     # in here insert value at a index
-    def insert_at(self,data,index):
-        if index>self.length():
+    def insert_at(self, data, index):
+        if index > self.length():
             raise Exception("invalid index")
         elif index == 0:
             self.insert_at_begining(data)
@@ -45,15 +45,24 @@ class LinkedList:
             count = 0
             itr = self.head
             while itr:
-                if count+1 == index:
-                    itr.next = Node(data,itr.next)
+                if count + 1 == index:
+                    itr.next = Node(data, itr.next)
                     break
                 itr = itr.next
                 count += 1
 
-    def insert_after(self,data,existing_value):
-        pass
-
+    # in here we enter the data after existing value
+    def insert_after(self, data, existing_value):
+        if self.head is None:
+            raise Exception("Empty linked list")
+        else :
+            itr = self.head
+            while itr:
+                if itr.data == existing_value:
+                    itr.next = Node(data, itr.next)
+                    return
+                itr = itr.next
+            raise Exception("invalid existing value")
 
     # in here we remove element at index
     def remove_at(self, index):
@@ -72,11 +81,20 @@ class LinkedList:
                 itr = itr.next
                 count += 1
 
-    def remove(self,existing_value):
-        pass
-
-
-
+    # in here we are going to remove the node by value
+    def remove(self, existing_value):
+        if self.head is None:
+            raise Exception("empty list")
+        elif self.head.data == existing_value:
+            self.head = self.head.next
+        else:
+            itr = self.head.next
+            while itr.next:
+                if itr.next.data == existing_value:
+                    itr.next = itr.next.next
+                    return
+                itr = itr.next
+            raise Exception("Not exists")
 
     # in here return the length of the linked list
     def length(self):
@@ -107,6 +125,7 @@ class LinkedList:
 if __name__ == "__main__":
     ll = LinkedList()
     ll.insert_values(["banana", "apple", "grapes"])
-    ll.insert_at_end("papaya")
-    ll.insert_at("mango",0)
+    ll.insert_after("mango","banana")
+    #ll.print()
+    ll.remove("mang")
     ll.print()
