@@ -42,12 +42,12 @@ class BinaryTree:
             return True
         if value < self.data:
             if self.left:
-                return self.left.search(value)
+                return self.left.search(value, )
             else:
                 return False
         if value > self.data:
             if self.right:
-                return self.right.search(value)
+                return self.right.search(value, )
             else:
                 return False
         raise Exception("something went wrong")
